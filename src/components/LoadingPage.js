@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { 
   View, 
   Text, 
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from 'react-native';
 
 class LoadingPage extends Component {
   render() {
     return (
       <View style={styles.containerStyle}>
-        <Text style={styles.textStyle}>[LOGO IMAGE]</Text>
-        <Text style={styles.textStyle}>Loading</Text>
+        <Image 
+          source={require('../../img/logo/logo.png')}
+          style={styles.logoStyle}
+        />
         <ActivityIndicator size='large' />
       </View>
     );
@@ -21,12 +24,12 @@ const styles = {
   containerStyle: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#fbecea',
   },
 
-  textStyle: {
-    marginBottom: 20,
-    fontSize: 30,
+  logoStyle: {
+    marginBottom: 40,
   }
 }
 

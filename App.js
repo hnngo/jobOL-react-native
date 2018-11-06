@@ -1,10 +1,22 @@
 import React from 'react';
-import LoadingPage from './src/components/Loading';
+import { View } from 'react-native';
+import LoadingPage from './src/components/LoadingPage';
+import LoginPage from './src/components/LoginPage';
+import { InputLoginForm } from './src/components/common';
 
 export default class App extends React.Component {
   render() {
     return (
-      <LoadingPage />
+      <View style={styles.containerStyle}>
+        <LoginPage
+        />
+      </View>
     );
+  }
+}
+
+const styles = {
+  containerStyle: {
+    flex: 1,
   }
 }

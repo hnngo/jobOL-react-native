@@ -3,6 +3,7 @@ import {
   View,
   TextInput,
   Platform,
+  StyleSheet
 } from 'react-native';
 
 const InputLoginForm = (props) => {
@@ -23,12 +24,12 @@ const InputLoginForm = (props) => {
     );
 };
 
-const styles = {
+const styles = StyleSheet.create ({
     inputStyle: {
         color: '#000000',
-        paddingRight: 10,
-        paddingLeft: 10,
         fontSize: 18,
+        width: 180,
+        textAlign: 'center'
     },
 
     containerStyle: {
@@ -56,6 +57,6 @@ const styles = {
           },
       }),
     }
-};
+});
 
 export { InputLoginForm };

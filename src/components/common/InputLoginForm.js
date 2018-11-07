@@ -7,12 +7,13 @@ import {
 } from 'react-native';
 
 const InputLoginForm = (props) => {
-    const { value, onChangeText, placeholder, secureTextEntry } = props;
+    const { value, onChangeText, placeholder, secureTextEntry, editable } = props;
     const { inputStyle, containerStyle } = styles;
 
     return (
         <View style={containerStyle}>
             <TextInput
+                editable={false || editable}
                 secureTextEntry={secureTextEntry}
                 placeholder={placeholder}
                 autoCorrect={false}

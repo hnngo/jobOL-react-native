@@ -5,12 +5,14 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 
-import LoadingPage from './src/components/LoadingPage';
-import LoginPage from './src/components/LoginPage';
+import LoadingScreen from './src/components/LoadingScreen';
+import LoginScreen from './src/components/LoginScreen';
 import rootreducer from './src/reducers';
 
 
 export default class App extends React.Component {
+  state = { loading: true };
+
   componentWillMount() {
     firebase.initializeApp({
       apiKey: "AIzaSyAAiVzb22bD3yeKNsFqwePB-h12lQGOgMs",
@@ -19,20 +21,29 @@ export default class App extends React.Component {
       projectId: "jobol-4f5c2",
       storageBucket: "jobol-4f5c2.appspot.com",
       messagingSenderId: "534138434969"
-    })
+    });
+
+    setTimeout(() => this.setState({ loading: false }), 3000);
   }
 
-  render() {
+  renderLoading() {
+    if (this.state.loading) {
+      return <LoadingScreen />;
+    }
+
     const store = createStore(rootreducer, {}, applyMiddleware(ReduxThunk));
 
     return (
       <Provider store={store}>
         <View style={styles.containerStyle}>
-          <LoginPage
-          />
+          <LoginScreen />
         </View>
       </Provider>
     );
+  }
+
+  render() {
+    return this.renderLoading();
   }
 }
 
@@ -41,3 +52,15 @@ const styles = {
     flex: 1,
   }
 }
+
+/*render() {
+    const store = createStore(rootreducer, {}, applyMiddleware(ReduxThunk));
+
+    return (
+      <Provider store={store}>
+        <View style={styles.containerStyle}>
+          <LoginScreen />
+        </View>
+      </Provider>
+    );
+  }*/

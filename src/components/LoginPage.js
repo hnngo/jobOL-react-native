@@ -15,6 +15,9 @@ import {
   actInputEmail,
   actInputPassword,
   actInputConfirmPassword,
+  actCreateNewUser,
+  actBackToLogin,
+  actGotoCreate,
 } from '../actions';
 import { InputLoginForm } from './common';
 
@@ -23,8 +26,7 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      isNewAccount: false, 
-      isConfirmPassword: false 
+      isNewAccount: false
     };
 
     this.handlePressLogin = this.handlePressLogin.bind(this);
@@ -37,24 +39,28 @@ class LoginPage extends Component {
   }
 
   handlePressLogin() {
+    // In state [Back To Login]
     if (this.state.isNewAccount) {
       this.setState({ isNewAccount: false })
-      return null;
+      this.props.actBackToLogin();
+    } else {
+      // In state [Login]
+      this.props.actLogin({ 
+        email: this.props.email,
+        password: this.props.password
+      });
     }
-
-    this.props.actLogin({ 
-      email: this.props.email,
-      password: this.props.password
-    });
   }
 
   handlePressCreate() {
-    if (!this.state.isConfirmPassword) {
+    // Popup confirm password
+    if (!this.state.isNewAccount) {
       this.setState({ isNewAccount: true });
-      return null;
-    }
-    
-    // Handle action create here
+      this.props.actGotoCreate();
+    } else if (this.props.error === null) {
+      // Dispatch create action
+      this.props.actCreateNewUser({ email: this.props.email, password: this.props.password });
+    } 
   }
 
   handleInputEmail(inputEmail) {
@@ -70,7 +76,7 @@ class LoginPage extends Component {
   }
 
   renderError() {
-    if (this.props.error) {
+    if (this.props.error !== null) {
       return (
         <Text style={styles.errorTextStyle}>
           {this.props.error}
@@ -135,7 +141,7 @@ class LoginPage extends Component {
           style={styles.logoStyle}
         />
         <InputLoginForm
-          placeholder='email'
+          placeholder='email@test.com'
           onChangeText={(text) => this.handleInputEmail(text)}
           value={this.props.email}
           editable={!this.props.loading}
@@ -180,9 +186,9 @@ const styles = StyleSheet.create({
 
   errorTextStyle: {
     color: 'red',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "300",
-    marginTop: 10,
+    marginTop: 20,
   }
 });
 
@@ -197,6 +203,9 @@ export default connect(mapStateToProps, {
   actInputEmail,
   actInputPassword,
   actInputConfirmPassword,
+  actCreateNewUser,
+  actBackToLogin,
+  actGotoCreate,
 })(LoginPage);
 
 // Create new account

@@ -6,6 +6,11 @@ import {
   ACT_LOGIN_INPUT_EMAIL,
   ACT_LOGIN_INPUT_PASSWORD,
   ACT_LOGIN_INPUT_CONFIRM_PASSWORD,
+  ACT_LOGIN_GOTO_CREATE,
+  ACT_CREATE_LOADING,
+  ACT_CREATE_BACK_TO_LOGIN,
+  ACT_CREATE_SUCCESS,
+  ACT_CREATE_FAIL,
 } from './type';
 
 export const actInputEmail = (email) => {
@@ -42,6 +47,34 @@ export const actLogin = ({ email, password }) => {
       }))
       .catch(() => dispatch({
         type: ACT_LOGIN_FAIL
+      }));
+  }
+};
+
+export const actGotoCreate = () => {
+  return {
+    type: ACT_LOGIN_GOTO_CREATE
+  };
+};
+
+export const actBackToLogin = () => {
+  return {
+    type: ACT_CREATE_BACK_TO_LOGIN
+  };
+};
+
+export const actCreateNewUser = ({ email, password }) => {
+  return (dispatch) => {
+    dispatch({
+      type: ACT_CREATE_LOADING,
+    })
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(() => dispatch({
+        type: ACT_CREATE_SUCCESS
+      }))
+      .catch(() => dispatch({
+        type: ACT_CREATE_FAIL
       }));
   }
 };

@@ -5,13 +5,16 @@ import {
   View,
   Text,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  LayoutAnimation,
+  UIManager,
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { 
   actLogin,
   actInputEmail,
   actInputPassword,
+  actInputConfirmPassword,
 } from '../actions';
 import { InputLoginForm } from './common';
 
@@ -19,13 +22,39 @@ import { InputLoginForm } from './common';
 class LoginPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { 
+      isNewAccount: false, 
+      isConfirmPassword: false 
+    };
 
     this.handlePressLogin = this.handlePressLogin.bind(this);
   }
 
-  handlePressLogin(email, password) {
-    this.props.actLogin({ email, password });
+  componentWillUpdate() {
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+
+    LayoutAnimation.spring();
+  }
+
+  handlePressLogin() {
+    if (this.state.isNewAccount) {
+      this.setState({ isNewAccount: false })
+      return null;
+    }
+
+    this.props.actLogin({ 
+      email: this.props.email,
+      password: this.props.password
+    });
+  }
+
+  handlePressCreate() {
+    if (!this.state.isConfirmPassword) {
+      this.setState({ isNewAccount: true });
+      return null;
+    }
+    
+    // Handle action create here
   }
 
   handleInputEmail(inputEmail) {
@@ -36,17 +65,35 @@ class LoginPage extends Component {
     this.props.actInputPassword(inputPasswod);
   }
 
+  handleInputConfirmPassword(inputCFPasswod) {
+    this.props.actInputConfirmPassword(inputCFPasswod);
+  }
+
   renderError() {
     if (this.props.error) {
       return (
         <Text style={styles.errorTextStyle}>
-          Email or password is invalid!!
+          {this.props.error}
         </Text>
       );
     }
   }
 
-  renderLoginButton() {
+  renderConfirmPassword() {
+    if (this.state.isNewAccount) {
+      return (
+        <InputLoginForm
+          placeholder='confirm password'
+          secureTextEntry
+          onChangeText={(text) => this.handleInputConfirmPassword(text)}
+          value={this.props.cfPassword}
+          editable={!this.props.loading}
+        />
+      );
+    }
+  }
+
+  renderButton() {
     if (this.props.loading) {
       return (
         <View>
@@ -61,12 +108,12 @@ class LoginPage extends Component {
     return (
       <View style={styles.groupButtonStyle}>
         <Button
-            title='Sign In'
+            title={this.state.isNewAccount ? 'Back To Login' : 'Login'}
             containerViewStyle={styles.buttonStyle}
             borderRadius={20}
             color='#fff'
             backgroundColor='#c13725'
-            onPress={() => this.handlePressLogin(this.state.email, this.state.password)}
+            onPress={() => this.handlePressLogin()}
         />
         <Button
             title='Create Account'
@@ -74,7 +121,7 @@ class LoginPage extends Component {
             borderRadius={20}
             color='#fff'
             backgroundColor='#c13725'
-            onPress={() => {}}
+            onPress={() => this.handlePressCreate()}
         />
       </View>
     );
@@ -100,8 +147,9 @@ class LoginPage extends Component {
           value={this.props.password}
           editable={!this.props.loading}
         />
+        {this.renderConfirmPassword()}
         {this.renderError()}
-        {this.renderLoginButton()}
+        {this.renderButton()}
       </View>
     );
   }
@@ -139,15 +187,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { email, password, loading, error } = state.redLogin;
+  const { email, password, cfPassword, loading, error } = state.redLogin;
 
-  return { email, password, loading, error };
+  return { email, password, cfPassword, loading, error };
 }
 
 export default connect(mapStateToProps, {
   actLogin,
   actInputEmail,
   actInputPassword,
+  actInputConfirmPassword,
 })(LoginPage);
 
 // Create new account

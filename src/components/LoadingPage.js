@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { 
-  View, 
-  Text, 
+  View,
   ActivityIndicator,
   Image
 } from 'react-native';

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image, View, ActivityIndicator } from 'react-native';
+import { 
+  Image,
+  View,
+  Text,
+  ActivityIndicator,
+  StyleSheet
+} from 'react-native';
 import { Button } from 'react-native-elements';
+import { 
+  actLogin,
+  actInputEmail,
+  actInputPassword,
+} from '../actions';
 import { InputLoginForm } from './common';
-import { actLogin } from '../actions';
 
 
 class LoginPage extends Component {
@@ -18,27 +28,55 @@ class LoginPage extends Component {
     this.props.actLogin({ email, password });
   }
 
+  handleInputEmail(inputEmail) {
+    this.props.actInputEmail(inputEmail);
+  }
+
+  handleInputPassword(inputPasswod) {
+    this.props.actInputPassword(inputPasswod);
+  }
+
+  renderError() {
+    if (this.props.error) {
+      return (
+        <Text style={styles.errorTextStyle}>
+          Email or password is invalid!!
+        </Text>
+      );
+    }
+  }
+
   renderLoginButton() {
     if (this.props.loading) {
       return (
         <View>
           <ActivityIndicator 
             size='large'
-            style={{ marginTop: 30 }}
+            style={{ marginTop: 60 }}
           />
         </View>
       );
     }
 
     return (
-      <Button
-          title='Sign In'
-          containerViewStyle={styles.buttonStyle}
-          borderRadius={20}
-          color='#fff'
-          backgroundColor='#c13725'
-          onPress={() => this.handlePressLogin(this.state.email, this.state.password)}
-      />
+      <View style={styles.groupButtonStyle}>
+        <Button
+            title='Sign In'
+            containerViewStyle={styles.buttonStyle}
+            borderRadius={20}
+            color='#fff'
+            backgroundColor='#c13725'
+            onPress={() => this.handlePressLogin(this.state.email, this.state.password)}
+        />
+        <Button
+            title='Create Account'
+            containerViewStyle={styles.buttonStyle}
+            borderRadius={20}
+            color='#fff'
+            backgroundColor='#c13725'
+            onPress={() => {}}
+        />
+      </View>
     );
   }
   
@@ -51,17 +89,18 @@ class LoginPage extends Component {
         />
         <InputLoginForm
           placeholder='email'
-          onChangeText={(text) => this.setState({ email: text })}
-          value={this.state.email}
+          onChangeText={(text) => this.handleInputEmail(text)}
+          value={this.props.email}
           editable={!this.props.loading}
         />
         <InputLoginForm
           placeholder='password'
           secureTextEntry
-          onChangeText={(text) => this.setState({ password: text })}
-          value={this.state.password}
+          onChangeText={(text) => this.handleInputPassword(text)}
+          value={this.props.password}
           editable={!this.props.loading}
         />
+        {this.renderError()}
         {this.renderLoginButton()}
       </View>
     );
@@ -70,7 +109,7 @@ class LoginPage extends Component {
 
 LoginPage.defaultProps = { loading: false };
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 60,
     flex: 1,
@@ -78,23 +117,38 @@ const styles = {
     alignItems: 'center',
   },
 
+  groupButtonStyle: {
+    marginTop: 20,
+  },
+
   buttonStyle: {
     width: 220,
-    marginTop: 30
+    marginTop: 10
   },
 
   logoStyle : {
     marginBottom: 60
+  },
+
+  errorTextStyle: {
+    color: 'red',
+    fontSize: 20,
+    fontWeight: "300",
+    marginTop: 10,
   }
-};
+});
 
 const mapStateToProps = (state) => {
-  const { loading } = state.redLogin;
+  const { email, password, loading, error } = state.redLogin;
 
-  return { loading };
+  return { email, password, loading, error };
 }
 
-export default connect(mapStateToProps, { actLogin })(LoginPage);
+export default connect(mapStateToProps, {
+  actLogin,
+  actInputEmail,
+  actInputPassword,
+})(LoginPage);
 
 // Create new account
 // Forgot your password

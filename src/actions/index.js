@@ -70,8 +70,8 @@ export const actCreateNewUser = ({ email, password }) => {
     })
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => dispatch({
-        type: ACT_CREATE_SUCCESS
+      .then(() => dispatch({ 
+          type: ACT_CREATE_SUCCESS 
       }))
       .catch(() => dispatch({
         type: ACT_CREATE_FAIL

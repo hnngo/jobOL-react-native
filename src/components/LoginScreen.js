@@ -20,14 +20,13 @@ import {
   actGotoCreate,
 } from '../actions';
 import { InputLoginForm } from './common';
+import RootNavigator from '../navigation/Router';
 
 
-class LoginPage extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      isNewAccount: false
-    };
+    this.state = { isNewAccount: false };
 
     this.handlePressLogin = this.handlePressLogin.bind(this);
   }
@@ -35,7 +34,7 @@ class LoginPage extends Component {
   componentWillUpdate() {
     UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
-    LayoutAnimation.spring();
+    LayoutAnimation.easeInEaseOut();
   }
 
   handlePressLogin() {
@@ -132,8 +131,13 @@ class LoginPage extends Component {
       </View>
     );
   }
-  
+
   render() {
+    // Check if user already login
+    if (this.props.isLogin) {
+      return <RootNavigator />
+    }
+
     return (
       <View style={styles.containerStyle}>
         <Image 
@@ -161,7 +165,7 @@ class LoginPage extends Component {
   }
 }
 
-LoginPage.defaultProps = { loading: false };
+//LoginScreen.defaultProps = { loading: false };
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -193,9 +197,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { email, password, cfPassword, loading, error } = state.redLogin;
+  const { isLogin, email, password, cfPassword, loading, error } = state.redLogin;
 
-  return { email, password, cfPassword, loading, error };
+  return { isLogin, email, password, cfPassword, loading, error };
 }
 
 export default connect(mapStateToProps, {
@@ -206,7 +210,7 @@ export default connect(mapStateToProps, {
   actCreateNewUser,
   actBackToLogin,
   actGotoCreate,
-})(LoginPage);
+})(LoginScreen);
 
 // Create new account
 // Forgot your password

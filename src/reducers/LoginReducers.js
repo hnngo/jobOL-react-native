@@ -23,8 +23,16 @@ const INITIAL_STATE = {
   password: '',
   cfPassword: '',
   error: null,
-  loading: false
+  loading: false,
+  isLogin: false,
 }
+
+//----DEBUG---//
+if (1) {
+  INITIAL_STATE.email = 'test@a.com';
+  INITIAL_STATE.password = '123456';
+}
+//----DEBUG---//
 
 export default (state = INITIAL_STATE, action) => {
   console.log(action)
@@ -43,7 +51,7 @@ export default (state = INITIAL_STATE, action) => {
     case ACT_LOGIN_LOADING:
       return { ...state, loading: true };
     case ACT_LOGIN_SUCCESS:
-      return { ...state, ...INITIAL_STATE };
+      return { ...state, ...INITIAL_STATE, isLogin: true };
     case ACT_LOGIN_FAIL:
       return { ...state, loading: false, error: ERR_LOGIN_INVALID_EMAIL_PWD, password: '' };
     case ACT_LOGIN_GOTO_CREATE:
@@ -51,13 +59,13 @@ export default (state = INITIAL_STATE, action) => {
     
     //--------------CREATE----------------//
     case ACT_CREATE_BACK_TO_LOGIN:
-      return { ...state, error: null, cfPassword: '' }
+      return { ...state, error: null, cfPassword: '' };
     case ACT_CREATE_LOADING:
       return { ...state, loading: true };
     case ACT_CREATE_SUCCESS:
-      return { ...state, ...INITIAL_STATE }
+      return { ...state, ...INITIAL_STATE, isLogin: true };
     case ACT_CREATE_FAIL:
-      return { ...state, error: ERR_CREATE_INVALID_EMAIL, loading: false }
+      return { ...state, error: ERR_CREATE_INVALID_EMAIL, loading: false };
     //--------------DEFAULT---------------//
     default:
       return state;

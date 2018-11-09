@@ -4,14 +4,17 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
-
 import LoadingScreen from './src/components/LoadingScreen';
 import LoginScreen from './src/components/LoginScreen';
 import rootreducer from './src/reducers';
 
 
 export default class App extends React.Component {
-  state = { loading: true };
+  constructor(props) {
+    super(props);
+
+    this.state = ({ loading: true });
+  }
 
   componentWillMount() {
     firebase.initializeApp({
@@ -26,7 +29,7 @@ export default class App extends React.Component {
     setTimeout(() => this.setState({ loading: false }), 3000);
   }
 
-  renderLoading() {
+  render() {
     if (this.state.loading) {
       return <LoadingScreen />;
     }
@@ -40,10 +43,6 @@ export default class App extends React.Component {
         </View>
       </Provider>
     );
-  }
-
-  render() {
-    return this.renderLoading();
   }
 }
 

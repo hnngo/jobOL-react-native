@@ -7,15 +7,36 @@ import ProfileScreen from '../components/ProfileScreen';
 
 
 const JobStack = createStackNavigator({
-  JobScreen: JobScreen,
+  JobScreen: {
+    screen: JobScreen,
+    navigationOptions: () => ({
+      title: 'Jobs',
+      headerTintColor: '#D3412B',
+      headerTitleStyle: { fontSize: 24 }
+    })
+  },
 });
 
 const WishListStack = createStackNavigator({
-  WishListScreen: WishListScreen
+  WishListScreen: {
+    screen: WishListScreen,
+    navigationOptions: () => ({
+      title: 'Wish List',
+      headerTintColor: '#D3412B',
+      headerTitleStyle: { fontSize: 24 }
+    }),
+  },
 });
 
 const ProfileStack = createStackNavigator({
-  ProfileScreen: ProfileScreen
+  ProfileScreen: {
+    screen: ProfileScreen,
+    navigationOptions: () => ({
+      title: 'Profile',
+      headerTintColor: '#D3412B',
+      headerTitleStyle: { fontSize: 24 }
+    }),
+  },
 });
 
 const RootNavigator = createBottomTabNavigator(
@@ -40,7 +61,7 @@ const RootNavigator = createBottomTabNavigator(
         } 
 
         return <Ionicons name={iconName} size={26} color={tintColor} />
-      },
+      }
     }),
     tabBarOptions: {
       activeTintColor: '#D3412B',

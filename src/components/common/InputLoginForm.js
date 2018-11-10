@@ -6,8 +6,23 @@ import {
   StyleSheet
 } from 'react-native';
 
+import {
+    INPUT_BORDER_COLOR,
+    INPUT_SHADOW_COLOR,
+    INPUT_BG_COLOR,
+} from '../../constant/ColorCode';
+
 const InputLoginForm = (props) => {
-    const { value, onChangeText, placeholder, secureTextEntry, editable } = props;
+    const { 
+        value,
+        onChangeText,
+        placeholder,
+        secureTextEntry,
+        editable,
+        keyboardType,
+        returnKeyType
+    } = props;
+
     const { inputStyle, containerStyle } = styles;
 
     return (
@@ -20,6 +35,8 @@ const InputLoginForm = (props) => {
                 value={value}
                 onChangeText={onChangeText}
                 style={inputStyle}
+                keyboardType={keyboardType}
+                returnKeyType={returnKeyType}
             />
         </View>
     );
@@ -27,7 +44,7 @@ const InputLoginForm = (props) => {
 
 const styles = StyleSheet.create ({
     inputStyle: {
-        color: '#000000',
+        color: INPUT_BG_COLOR,
         fontSize: 18,
         width: 180,
         textAlign: 'center'
@@ -37,14 +54,14 @@ const styles = StyleSheet.create ({
         margin: 5,
         width: 220,
         height: 50,
-        borderColor: '#c13725',
+        borderColor: INPUT_BORDER_COLOR,
         borderWidth: 1,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
         ...Platform.select({
           ios: {
-              shadowColor: '#7e6a67',
+              shadowColor: INPUT_SHADOW_COLOR,
               shadowOffset: {
                   width: 0,
                   height: 2,

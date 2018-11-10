@@ -10,6 +10,9 @@ import {
   UIManager,
 } from 'react-native';
 import { Button } from 'react-native-elements';
+import { InputLoginForm } from './common';
+import RootNavigator from '../navigation/Router';
+
 import { 
   actLogin,
   actInputEmail,
@@ -19,14 +22,18 @@ import {
   actBackToLogin,
   actGotoCreate,
 } from '../actions';
-import { InputLoginForm } from './common';
-import RootNavigator from '../navigation/Router';
+
+import {
+  TEXT_ERROR_COLOR,
+  TEXT_MUTED_COLOR,
+  BG_COLOR,
+} from '../constant/ColorCode';
 
 
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { isNewAccount: false };
+    this.state = { isNewAccount: false, createDisable: false };
 
     this.handlePressLogin = this.handlePressLogin.bind(this);
   }
@@ -54,7 +61,7 @@ class LoginScreen extends Component {
   handlePressCreate() {
     // Popup confirm password
     if (!this.state.isNewAccount) {
-      this.setState({ isNewAccount: true });
+      this.setState({ isNewAccount: true, createDisable: true });
       this.props.actGotoCreate();
     } else if (this.props.error === null) {
       // Dispatch create action
@@ -90,9 +97,18 @@ class LoginScreen extends Component {
         <InputLoginForm
           placeholder='confirm password'
           secureTextEntry
-          onChangeText={(text) => this.handleInputConfirmPassword(text)}
+          onChangeText={(text) => {
+            if (text === '') {
+              this.setState({ createDisable: true });
+            } else {
+              this.setState({ createDisable: false });
+            }
+
+            return this.handleInputConfirmPassword(text)
+          }}
           value={this.props.cfPassword}
           editable={!this.props.loading}
+          returnKeyType='done'
         />
       );
     }
@@ -127,6 +143,8 @@ class LoginScreen extends Component {
             color='#fff'
             backgroundColor='#c13725'
             onPress={() => this.handlePressCreate()}
+            disabled={this.state.createDisable}
+            disabledStyle={{ backgroundColor: TEXT_MUTED_COLOR, opacity: 0.5 }}
         />
       </View>
     );
@@ -149,6 +167,8 @@ class LoginScreen extends Component {
           onChangeText={(text) => this.handleInputEmail(text)}
           value={this.props.email}
           editable={!this.props.loading}
+          keyboardType='email-address'
+          returnKeyType='done'
         />
         <InputLoginForm
           placeholder='password'
@@ -156,6 +176,7 @@ class LoginScreen extends Component {
           onChangeText={(text) => this.handleInputPassword(text)}
           value={this.props.password}
           editable={!this.props.loading}
+          returnKeyType='done'
         />
         {this.renderConfirmPassword()}
         {this.renderError()}
@@ -171,7 +192,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 60,
     flex: 1,
-    backgroundColor: '#fbecea',
+    backgroundColor: BG_COLOR,
     alignItems: 'center',
   },
 
@@ -189,10 +210,12 @@ const styles = StyleSheet.create({
   },
 
   errorTextStyle: {
-    color: 'red',
-    fontSize: 18,
-    fontWeight: "300",
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: TEXT_ERROR_COLOR,
+    fontSize: 16,
     marginTop: 20,
+    textAlign: 'center',
   }
 });
 
@@ -212,7 +235,6 @@ export default connect(mapStateToProps, {
   actGotoCreate,
 })(LoginScreen);
 
-// Create new account
 // Forgot your password
 // Facebook, Google Authentication
 // Login as guest to watch

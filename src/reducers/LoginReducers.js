@@ -65,7 +65,7 @@ export default (state = INITIAL_STATE, action) => {
     case ACT_CREATE_SUCCESS:
       return { ...state, ...INITIAL_STATE, isLogin: true };
     case ACT_CREATE_FAIL:
-      return { ...state, error: ERR_CREATE_INVALID_EMAIL, loading: false };
+      return { ...state, error: ERR_CREATE_INVALID_EMAIL, password: '', cfPassword: '', loading: false };
     //--------------DEFAULT---------------//
     default:
       return state;

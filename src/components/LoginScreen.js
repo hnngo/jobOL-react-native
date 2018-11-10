@@ -151,9 +151,16 @@ class LoginScreen extends Component {
   }
 
   render() {
+    //----DEBUG---//
+    // Skip Authentication Steps
+    if (0) {
+      return <RootNavigator />;
+    }
+    //----DEBUG---//
+
     // Check if user already login
     if (this.props.isLogin) {
-      return <RootNavigator />
+      return <RootNavigator />;
     }
 
     return (

@@ -10,7 +10,7 @@ import {
   ACT_CREATE_BACK_TO_LOGIN,
   ACT_CREATE_SUCCESS,
   ACT_CREATE_FAIL,
-} from '../actions/type';
+} from '../constant/ActionConst';
 
 import {
   ERR_LOGIN_CFPWD_NOT_MATCH,
@@ -28,6 +28,7 @@ const INITIAL_STATE = {
 }
 
 //----DEBUG---//
+// Skip Input User/Password
 if (1) {
   INITIAL_STATE.email = 'test@a.com';
   INITIAL_STATE.password = '123456';

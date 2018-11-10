@@ -12,3 +12,6 @@ export const ACT_CREATE_LOADING = 'act_create_loading';
 export const ACT_CREATE_BACK_TO_LOGIN = 'act_create_back_to_login';
 export const ACT_CREATE_SUCCESS = 'act_create_success';
 export const ACT_CREATE_FAIL = 'act_create_fail';
+
+//------------JOB---------------//
+export const ACT_FETCH_JOB_LIST = 'act_fetch_job_list';

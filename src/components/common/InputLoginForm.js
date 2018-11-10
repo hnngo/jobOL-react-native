@@ -9,7 +9,7 @@ import {
 import {
     INPUT_BORDER_COLOR,
     INPUT_SHADOW_COLOR,
-    INPUT_BG_COLOR,
+    INPUT_TEXT_COLOR,
 } from '../../constant/ColorCode';
 
 const InputLoginForm = (props) => {
@@ -44,7 +44,7 @@ const InputLoginForm = (props) => {
 
 const styles = StyleSheet.create ({
     inputStyle: {
-        color: INPUT_BG_COLOR,
+        color: INPUT_TEXT_COLOR,
         fontSize: 18,
         width: 180,
         textAlign: 'center'

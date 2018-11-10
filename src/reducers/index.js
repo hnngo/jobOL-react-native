@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import LoginReducer from './LoginReducers';
+import LoginReducers from './LoginReducers';
+import JobReducers from './JobReducers';
 
 export default combineReducers({
-  redLogin: LoginReducer
+  reducerAuth: LoginReducers,
+  reducerJob: JobReducers
 });

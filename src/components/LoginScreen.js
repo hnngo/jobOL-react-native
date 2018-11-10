@@ -26,7 +26,7 @@ import {
 import {
   TEXT_ERROR_COLOR,
   TEXT_MUTED_COLOR,
-  BG_COLOR,
+  COLOR_BG,
 } from '../constant/ColorCode';
 
 
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 60,
     flex: 1,
-    backgroundColor: BG_COLOR,
+    backgroundColor: COLOR_BG,
     alignItems: 'center',
   },
 
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { isLogin, email, password, cfPassword, loading, error } = state.redLogin;
+  const { isLogin, email, password, cfPassword, loading, error } = state.reducerAuth;
 
   return { isLogin, email, password, cfPassword, loading, error };
 }

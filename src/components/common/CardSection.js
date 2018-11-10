@@ -1,6 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import { 
+    COLOR_BG,
+    INPUT_BORDER_COLOR
+} from '../../constant/ColorCode';
+
 const CardSection = (props) => {
     return (
         <View style={[styles.containerStyle, props.style]}>
@@ -13,10 +18,10 @@ const styles = {
     containerStyle: {
         borderBottomWidth: 1,
         padding: 5,
-        backgroundColor: '#f7eef5',
+        backgroundColor: COLOR_BG,
         justifyContent: 'flex-start',
-        flexDirection: 'row',
-        borderColor: '#ddd',
+        // flexDirection: 'row',
+        borderColor: INPUT_BORDER_COLOR,
         position: 'relative',
     }
 };

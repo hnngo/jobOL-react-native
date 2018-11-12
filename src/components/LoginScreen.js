@@ -153,7 +153,7 @@ class LoginScreen extends Component {
   render() {
     //----DEBUG---//
     // Skip Authentication Steps
-    if (0) {
+    if (1) {
       return <RootNavigator />;
     }
     //----DEBUG---//

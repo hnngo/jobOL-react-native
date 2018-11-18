@@ -25,7 +25,7 @@ import {
 
 import {
   TEXT_ERROR_COLOR,
-  TEXT_MUTED_COLOR,
+  COLOR_TEXT_MUTED,
   COLOR_BG,
 } from '../constant/ColorCode';
 
@@ -144,7 +144,7 @@ class LoginScreen extends Component {
             backgroundColor='#c13725'
             onPress={() => this.handlePressCreate()}
             disabled={this.state.createDisable}
-            disabledStyle={{ backgroundColor: TEXT_MUTED_COLOR, opacity: 0.5 }}
+            disabledStyle={{ backgroundColor: COLOR_TEXT_MUTED, opacity: 0.5 }}
         />
       </View>
     );
@@ -153,7 +153,7 @@ class LoginScreen extends Component {
   render() {
     //----DEBUG---//
     // Skip Authentication Steps
-    if (0) {
+    if (1) {
       return <RootNavigator />;
     }
     //----DEBUG---//

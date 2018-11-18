@@ -11,7 +11,7 @@ class JobScreen extends Component {
   render() {
     //----DEBUG----//
     // Fake job list
-    if (0) {
+    if (1) {
       const DEBUG_JOB_LIST_DATA = {
         "publicData" : {
           "jobs" : {
@@ -111,7 +111,7 @@ class JobScreen extends Component {
       
 
       return (
-        <JobList jobList={DEBUG_JOB_LIST_DATA.publicData.jobs} />
+        <JobList jobList={DEBUG_JOB_LIST_DATA.publicData.jobs} {...this.props}/>
       );
     }
     //----DEBUG----//

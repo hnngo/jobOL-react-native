@@ -21,7 +21,6 @@ class JobList extends Component {
   state = { modalVisible: false };
 
   handleBookmarkPress(jobId) {
-    console.log(this.props.wishlist);
     this.props.actBookMarkJob(jobId, this.props.wishlist);
   }
 
@@ -53,7 +52,8 @@ class JobList extends Component {
 
           {/* Touch the Job */}
           <TouchableWithoutFeedback
-            onPress={() => this.setState({ modalVisible: true })}
+            //onPress={() => this.setState({ modalVisible: true })}
+            onPress={() => this.props.navigation.navigate('JobDetailScreen', { jobId: job.id, jobName: job.jobSlot })}
           >
             <View style={jobDetailStyle}>
               <Text style={jobTitleStyle}>
@@ -79,7 +79,7 @@ class JobList extends Component {
 
         {this.renderJobStatus(job)}
 
-        {/* Popup Modal */}
+        {/* Popup Modal
         <Modal
           animationType="slide"
           transparent={false}
@@ -99,7 +99,7 @@ class JobList extends Component {
               </TouchableHighlight>
             </View>
           </View>
-        </Modal>
+        </Modal> */}
       </View>
 
     );
@@ -107,7 +107,7 @@ class JobList extends Component {
 
   render() {
     const data = _.map(this.props.jobList, (job) => job);
-
+    
     return (
       <View style={styles.containerStyle}>
         <FlatList

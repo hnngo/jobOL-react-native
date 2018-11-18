@@ -2,19 +2,27 @@ import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import JobScreen from '../components/JobScreen';
+import JobDetailScreen from '../components/jobScreenStack/JobDetailScreen';
 import WishListScreen from '../components/WishListScreen';
 import ProfileScreen from '../components/ProfileScreen';
 
+import {
+  COLOR_MAIN,
+  COLOR_TEXT_MUTED,
+} from '../constant/ColorCode';
 
 const JobStack = createStackNavigator({
   JobScreen: {
     screen: JobScreen,
     navigationOptions: () => ({
       title: 'Jobs',
-      headerTintColor: '#D3412B',
+      headerTintColor: COLOR_MAIN,
       headerTitleStyle: { fontSize: 24 }
     })
   },
+  JobDetailScreen: {
+    screen: JobDetailScreen
+  }
 });
 
 const WishListStack = createStackNavigator({
@@ -22,7 +30,7 @@ const WishListStack = createStackNavigator({
     screen: WishListScreen,
     navigationOptions: () => ({
       title: 'Wish List',
-      headerTintColor: '#D3412B',
+      headerTintColor: COLOR_MAIN,
       headerTitleStyle: { fontSize: 24 }
     }),
   },
@@ -33,7 +41,7 @@ const ProfileStack = createStackNavigator({
     screen: ProfileScreen,
     navigationOptions: () => ({
       title: 'Profile',
-      headerTintColor: '#D3412B',
+      headerTintColor: COLOR_MAIN,
       headerTitleStyle: { fontSize: 24 }
     }),
   },
@@ -64,8 +72,8 @@ const RootNavigator = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: '#D3412B',
-      inactiveTintColor: '#707070',
+      activeTintColor: COLOR_MAIN,
+      inactiveTintColor: COLOR_TEXT_MUTED,
     },
   }
 );

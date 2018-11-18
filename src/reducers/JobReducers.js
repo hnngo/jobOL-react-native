@@ -13,8 +13,6 @@ export default (state = INITIAL_STATE, action) => {
     case ACT_FETCH_JOB_LIST:
       return { ...state, jobList: action.payload };
     case ACT_FETCH_WISH_LIST:
-      console.log('action.payload');
-      console.log(action.payload);
       if (action.payload === null) {
         return { ...state, wishlist: [] };
       } else if (action.payload.constructor === Array) {

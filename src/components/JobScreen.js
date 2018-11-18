@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import JobList from './jobScreenStack/jobList';
 import { actFetchJobList } from '../actions';
 
@@ -12,11 +11,12 @@ class JobScreen extends Component {
   render() {
     //----DEBUG----//
     // Fake job list
-    if (1) {
+    if (0) {
       const DEBUG_JOB_LIST_DATA = {
         "publicData" : {
           "jobs" : {
             "job_num_1" : {
+              "id" : 1,
               "cpnyContact" : {
                 "linken" : "abcde",
                 "mail" : "abcde",
@@ -31,6 +31,7 @@ class JobScreen extends Component {
               "jobStatus" : "Urgent"
             },
             "job_num_2" : {
+              "id" : 2,
               "cpnyContact" : {
                 "linken" : "abcde",
                 "mail" : "abcde",
@@ -45,6 +46,7 @@ class JobScreen extends Component {
               "jobStatus" : "Urgent"
             },
             "job_num_3" : {
+              "id" : 3,
               "cpnyContact" : {
                 "linken" : "abcde",
                 "mail" : "abcde",
@@ -59,6 +61,7 @@ class JobScreen extends Component {
               "jobStatus" : "Urgent"
             },
             "job_num_4" : {
+              "id" : 4,
               "cpnyContact" : {
                 "linken" : "abcde",
                 "mail" : "abcde",
@@ -73,6 +76,7 @@ class JobScreen extends Component {
               "jobStatus" : "Urgent"
             },
             "job_num_5" : {
+              "id" : 5,
               "cpnyContact" : {
                 "linken" : "abcde",
                 "mail" : "abcde",
@@ -87,6 +91,7 @@ class JobScreen extends Component {
               "jobStatus" : "Urgent"
             },
             "job_num_6" : {
+              "id" : 6,
               "cpnyContact" : {
                 "linken" : "abcde",
                 "mail" : "abcde",
@@ -103,6 +108,7 @@ class JobScreen extends Component {
           }
         }
       };
+      
 
       return (
         <JobList jobList={DEBUG_JOB_LIST_DATA.publicData.jobs} />
@@ -117,7 +123,7 @@ class JobScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const jobList = state.reducerJob;
+  const jobList = state.reducerJob.jobList;
   return { jobList };
 };
 

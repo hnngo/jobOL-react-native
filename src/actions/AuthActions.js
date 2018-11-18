@@ -11,6 +11,7 @@ import {
   ACT_CREATE_BACK_TO_LOGIN,
   ACT_CREATE_SUCCESS,
   ACT_CREATE_FAIL,
+  ACT_FETCH_WISH_LIST
 } from '../constant/ActionConst';
 
 export const actInputEmail = (email) => {
@@ -37,17 +38,17 @@ export const actInputConfirmPassword = (cfPassword) => {
 export const actLogin = ({ email, password }) => {
   return (dispatch) => {
     // Showing Activity Indicator
-    dispatch({
-      type: ACT_LOGIN_LOADING
-    });
+    dispatch({ type: ACT_LOGIN_LOADING });
 
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => dispatch({
-        type: ACT_LOGIN_SUCCESS
-      }))
-      .catch(() => dispatch({
-        type: ACT_LOGIN_FAIL
-      }));
+      .then(() => { 
+        dispatch({ type: ACT_LOGIN_SUCCESS });
+        firebase.database().ref(`/users/${firebase.auth().currentUser.uid}/wishlist`).once('value', (snapshot) => dispatch({
+          type: ACT_FETCH_WISH_LIST,
+          payload: snapshot.val()
+        }));
+      })
+      .catch(() => dispatch({ type: ACT_LOGIN_FAIL }));
   }
 };
 
@@ -70,9 +71,10 @@ export const actCreateNewUser = ({ email, password }) => {
     })
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => dispatch({ 
-          type: ACT_CREATE_SUCCESS 
-      }))
+      .then(() => {
+        dispatch({ type: ACT_CREATE_SUCCESS })
+        dispatch({ type: ACT_FETCH_WISH_LIST, payload: [] })
+      })
       .catch(() => dispatch({
         type: ACT_CREATE_FAIL
       }));

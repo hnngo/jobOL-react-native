@@ -15,3 +15,4 @@ export const ACT_CREATE_FAIL = 'act_create_fail';
 
 //------------JOB---------------//
 export const ACT_FETCH_JOB_LIST = 'act_fetch_job_list';
+export const ACT_FETCH_WISH_LIST = 'act_fetch_wish_list';

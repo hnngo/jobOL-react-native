@@ -5,6 +5,8 @@ import {
   Image
 } from 'react-native';
 
+import { COLOR_BG } from '../constant/ColorCode';
+
 class LoadingPage extends Component {
   render() {
     return (
@@ -24,7 +26,7 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fbecea',
+    backgroundColor: COLOR_BG,
   },
 
   logoStyle: {
@@ -33,3 +35,5 @@ const styles = {
 }
 
 export default LoadingPage;
+
+// Using slides to visuallize the how to use app

@@ -17,7 +17,7 @@ const JobStack = createStackNavigator({
     navigationOptions: () => ({
       title: 'Jobs',
       headerTintColor: COLOR_MAIN,
-      headerTitleStyle: { fontSize: 24 }
+      headerTitleStyle: { fontSize: 22 }
     })
   },
   JobDetailScreen: {
@@ -31,10 +31,14 @@ const WishListStack = createStackNavigator({
     navigationOptions: () => ({
       title: 'Wish List',
       headerTintColor: COLOR_MAIN,
-      headerTitleStyle: { fontSize: 24 }
+      headerTitleStyle: { fontSize: 22 }
     }),
   },
 });
+
+WishListStack.navigationOptions = {
+  tabBarLabel: 'Wish List'
+};
 
 const ProfileStack = createStackNavigator({
   ProfileScreen: {
@@ -42,7 +46,7 @@ const ProfileStack = createStackNavigator({
     navigationOptions: () => ({
       title: 'Profile',
       headerTintColor: COLOR_MAIN,
-      headerTitleStyle: { fontSize: 24 }
+      headerTitleStyle: { fontSize: 22 }
     }),
   },
 });
@@ -50,7 +54,7 @@ const ProfileStack = createStackNavigator({
 const RootNavigator = createBottomTabNavigator(
   {
     Jobs: JobStack,
-    'Wish List': WishListStack,
+    WishList: WishListStack,
     Profile: ProfileStack
   },
   {
@@ -62,7 +66,7 @@ const RootNavigator = createBottomTabNavigator(
           // Because this icon supported by material then return here
           iconName = 'work';
           return <MaterialIcons name={iconName} size={26} color={tintColor}/>
-        } else if (routeName === 'Wish List') {
+        } else if (routeName === 'WishList') {
           iconName = 'ios-list-box';
         } else if (routeName === 'Profile') {
           iconName = 'ios-person';

@@ -52,14 +52,5 @@ const styles = {
   }
 }
 
-/*render() {
-    const store = createStore(rootreducer, {}, applyMiddleware(ReduxThunk));
-
-    return (
-      <Provider store={store}>
-        <View style={styles.containerStyle}>
-          <LoginScreen />
-        </View>
-      </Provider>
-    );
-  }*/
+// Using slide
+// Using Bottom navigation

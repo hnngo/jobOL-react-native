@@ -30,7 +30,11 @@ export const actBookMarkJob = (jobId, wishlistData) => {
     firebase.database().ref(`/users/${currentUser.uid}`).set({ wishlist: newWishlist })
       .then(() => {
         // Store wishlist in the local storage
-        dispatch({ type: ACT_FETCH_WISH_LIST, payload: newWishlist })
-      });
+        dispatch({
+          type: ACT_FETCH_WISH_LIST,
+          payload: newWishlist
+        });
+      })
+      .catch((e) => console.log(e));
   }
 }

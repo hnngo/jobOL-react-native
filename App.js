@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -46,11 +46,11 @@ export default class App extends React.Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
   }
-}
+});
 
 // Using slide
 // Using Bottom navigation

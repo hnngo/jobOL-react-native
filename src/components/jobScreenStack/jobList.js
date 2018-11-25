@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { 
-  View, 
+import {
+  View,
   Text,
   StyleSheet,
   FlatList,
-  TouchableWithoutFeedback,
-  Modal,
-  TouchableHighlight
+  TouchableWithoutFeedback
 } from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { actBookMarkJob } from '../../actions/JobActions';
-import { 
+import {
   INPUT_BORDER_COLOR,
   COLOR_BG,
 } from '../../constant/ColorCode';
@@ -34,10 +32,10 @@ class JobList extends Component {
   }
 
   renderJobListItems(job) {
-    const { 
-      logoCompanyStyle, 
-      sectionStyle, 
-      jobDetailStyle, 
+    const {
+      logoCompanyStyle,
+      sectionStyle,
+      jobDetailStyle,
       bookmarkStyle,
       mainInfoStyle,
       jobTitleStyle
@@ -63,13 +61,13 @@ class JobList extends Component {
               <Text>{job.cpnyWebsite}</Text>
             </View>
           </TouchableWithoutFeedback>
-          
+
           {/* Touch the Bookmark */}
           <TouchableWithoutFeedback
             onPress={() => this.handleBookmarkPress(job.id)}
           >
             <View style={bookmarkStyle}>
-              <FontAwesome 
+              <FontAwesome
                 name={this.props.wishlist.includes(job.id) ? 'bookmark' : 'bookmark-o'}
                 size={30}
               />
@@ -78,28 +76,6 @@ class JobList extends Component {
         </View>
 
         {this.renderJobStatus(job)}
-
-        {/* Popup Modal
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setState({ modalVisible: false })
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal> */}
       </View>
 
     );
@@ -107,14 +83,14 @@ class JobList extends Component {
 
   render() {
     const data = _.map(this.props.jobList, (job) => job);
-    
+
     return (
       <View style={styles.containerStyle}>
         <FlatList
           data={data}
           renderItem={(job) => this.renderJobListItems(job.item)}
           keyExtractor={job => String(job.id)}
-          
+
         />
       </View>
     );
@@ -145,7 +121,7 @@ const styles = StyleSheet.create({
   },
 
   jobTitleStyle: {
-    fontSize: 20, 
+    fontSize: 20,
     fontWeight: '600'
   },
 
@@ -161,7 +137,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  return { wishlist: state.reducerJob.wishlist };
+  return { wishlist: state.reducerJob.wishList };
 }
 
 export default connect(mapStateToProps, { actBookMarkJob })(JobList);

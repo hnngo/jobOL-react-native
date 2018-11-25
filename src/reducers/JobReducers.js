@@ -5,18 +5,21 @@ import {
 
 const INITIAL_STATE = {
   jobList: {},
-  wishlist: []
+  wishList: []
 };
 
 export default (state = INITIAL_STATE, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case ACT_FETCH_JOB_LIST:
       return { ...state, jobList: action.payload };
     case ACT_FETCH_WISH_LIST:
       if (action.payload === null) {
-        return { ...state, wishlist: [] };
+        // when wish list has not created yet, new account
+        return { ...state };
       } else if (action.payload.constructor === Array) {
-        return { ...state, wishlist: [ ...action.payload ] };
+        // when wish list has already existed
+        return { ...state, wishList: [ ...action.payload ] };
       }
     default:
       return state;

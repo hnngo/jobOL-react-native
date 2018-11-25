@@ -40,6 +40,7 @@ export const actLogin = ({ email, password }) => {
     // Showing Activity Indicator
     dispatch({ type: ACT_LOGIN_LOADING });
 
+    // Sign in with email and fetch the wish list if have
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => { 
         dispatch({ type: ACT_LOGIN_SUCCESS });

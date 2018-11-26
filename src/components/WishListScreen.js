@@ -7,15 +7,17 @@ import { Card } from 'react-native-elements';
 class WishListScreen extends Component {
   renderJobCard() {
     return (
-      _.map(this.props.jobList, (job, index) => {
-        return (
-          <Card title={job.jobSlot} key={job.id}>
-            <Text>{job.cpnyName}</Text>
-            <Text>{job.cpnyLocation}</Text>
-            <Text>{job.cpnyWebsite}</Text>
-            <Text>{job.jobJD}</Text>
-          </Card>
-        )
+      _.map(this.props.jobList, (job) => {
+        if (this.props.wishList.includes(job.id)) {
+          return (
+            <Card title={job.title} key={job.id}>
+              <Text>{job.company}</Text>
+              <Text>{job.location}</Text>
+              <Text>{job.company_url}</Text>
+              <Text>{job.how_to_apply}</Text>
+            </Card>
+          );
+        }
       })
     );
   }

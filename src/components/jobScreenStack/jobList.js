@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import {
   View,
   Text,
@@ -16,17 +15,15 @@ import {
 } from '../../constant/ColorCode';
 
 class JobList extends Component {
-  state = { modalVisible: false };
-
   handleBookmarkPress(jobId) {
-    this.props.actBookMarkJob(jobId, this.props.wishlist);
+    this.props.actBookMarkJob(jobId, this.props.wishList);
   }
 
   renderJobStatus(job) {
     return (
       <View style={{ paddingLeft: 20, flexDirection: 'row', alignItems: 'center' }}>
           <Ionicons name='ios-timer' size={20} />
-          <Text>{job.jobStatus}</Text>
+          <Text>{job.created_at}</Text>
       </View>
     );
   }
@@ -55,10 +52,10 @@ class JobList extends Component {
           >
             <View style={jobDetailStyle}>
               <Text style={jobTitleStyle}>
-                {job.jobSlot}
+                {job.title}
               </Text>
-              <Text>{job.cpnyName}</Text>
-              <Text>{job.cpnyWebsite}</Text>
+              <Text>{job.company}</Text>
+              <Text>{job.company_url}</Text>
             </View>
           </TouchableWithoutFeedback>
 
@@ -68,7 +65,7 @@ class JobList extends Component {
           >
             <View style={bookmarkStyle}>
               <FontAwesome
-                name={this.props.wishlist.includes(job.id) ? 'bookmark' : 'bookmark-o'}
+                name={this.props.wishList.includes(job.id) ? 'bookmark' : 'bookmark-o'}
                 size={30}
               />
             </View>
@@ -82,15 +79,18 @@ class JobList extends Component {
   }
 
   render() {
-    const data = _.map(this.props.jobList, (job) => job);
+    // In case when async function fetch job has not yet finished
+    if (!this.props.jobList.length) {
+      return <View/>;
+    }
 
     return (
       <View style={styles.containerStyle}>
         <FlatList
-          data={data}
+          data={this.props.jobList}
           renderItem={(job) => this.renderJobListItems(job.item)}
           keyExtractor={job => String(job.id)}
-
+          extraData={this.props.wishList}
         />
       </View>
     );
@@ -137,7 +137,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  return { wishlist: state.reducerJob.wishList };
+  return {
+    jobList: state.reducerJob.jobList,
+    wishList: state.reducerJob.wishList
+  };
 }
 
 export default connect(mapStateToProps, { actBookMarkJob })(JobList);

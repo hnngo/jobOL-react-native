@@ -4,6 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
+  Image,
   FlatList,
   TouchableWithoutFeedback
 } from 'react-native';
@@ -28,6 +29,20 @@ class JobList extends Component {
     );
   }
 
+  renderCompanyLogo(logoURL) {
+    console.log(logoURL);
+    if (logoURL === null) {
+      return <FontAwesome name={'image'} size={60} />;
+    }
+
+    return (
+      <Image 
+        style={{ flex: 1, width: 100, resizeMode: 'contain'}}
+        source={{ uri: logoURL }}
+      />
+    );
+  }
+
   renderJobListItems(job) {
     const {
       logoCompanyStyle,
@@ -42,7 +57,7 @@ class JobList extends Component {
       <View style={sectionStyle}>
         <View style={mainInfoStyle}>
           <View styles={logoCompanyStyle}>
-            <FontAwesome name={'image'} size={60} />
+            {this.renderCompanyLogo(job.company_logo)}
           </View>
 
           {/* Touch the Job */}
@@ -126,7 +141,7 @@ const styles = StyleSheet.create({
   },
 
   logoCompanyStyle: {
-    flex: 1,
+    flex: 1
   },
 
   bookmarkStyle: {

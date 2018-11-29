@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Card } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
+import { COLOR_MAIN } from '../constant/ColorCode';
 
 class WishListScreen extends Component {
   renderJobCard() {
@@ -15,6 +16,10 @@ class WishListScreen extends Component {
               <Text>{job.location}</Text>
               <Text>{job.company_url}</Text>
               <Text>{job.how_to_apply}</Text>
+              <Button
+                title="Apply Now!!!"
+                backgroundColor={COLOR_MAIN}
+              />
             </Card>
           );
         }

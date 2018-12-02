@@ -30,9 +30,12 @@ class JobList extends Component {
   }
 
   renderCompanyLogo(logoURL) {
-    console.log(logoURL);
     if (logoURL === null) {
-      return <FontAwesome name={'image'} size={60} />;
+      return (
+        <View style={{ width: 100 }}>
+          <FontAwesome name={'image'} size={60} />
+        </View>
+      );
     }
 
     return (
@@ -114,7 +117,7 @@ class JobList extends Component {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: COLOR_BG,
     paddingTop: 10,
     paddingBottom: 10,

@@ -3,6 +3,8 @@ import axios from 'axios';
 import {
   ACT_FETCH_JOB_LIST,
   ACT_FETCH_WISH_LIST,
+  ACT_JOB_INPUT_KEYWORD,
+  ACT_JOB_INPUT_LOCATION,
 } from '../constant/ActionConst';
 
 
@@ -10,20 +12,9 @@ const GITHUB_JOB_ROOT_URL = 'https://jobs.github.com/positions.json?';
 const SEARCH_KEYWORD = 'javascript';
 const SEARCH_LOCATION = 'new+york';
 
-export const actFetchJobList = () => {
-  // Fetch job through firebase
-  // return (dispatch) => {
-  //   firebase.database().ref('/publicData/jobs')
-  //   .on('value', snapshot =>{
-  //     dispatch({
-  //       type: ACT_FETCH_JOB_LIST,
-  //       payload: snapshot.val()
-  //     })
-  //   })
-  // };
-
+export const actFetchJobList = (keyword = SEARCH_KEYWORD, location = SEARCH_LOCATION) => {
   // Fetch job through github jobs api
-  const querry = `${GITHUB_JOB_ROOT_URL}description=${SEARCH_KEYWORD}&location=${SEARCH_LOCATION}`;
+  const querry = `${GITHUB_JOB_ROOT_URL}description=${keyword}&location=${location}`;
 
   return (dispatch) => {    
     axios.get(querry).then(response => {
@@ -55,5 +46,19 @@ export const actBookMarkJob = (jobId, wishlistData) => {
         });
       })
       .catch((e) => console.log(e));
+  }
+}
+
+export const actJobInputKeyword = (inputKeyword) => {
+  return {
+    type: ACT_JOB_INPUT_KEYWORD,
+    payload: inputKeyword
+  }
+}
+
+export const actJobInputLocation = (inputLocation) => {
+  return {
+    type: ACT_JOB_INPUT_LOCATION,
+    payload: inputLocation
   }
 }

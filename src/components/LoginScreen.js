@@ -47,7 +47,7 @@ class LoginScreen extends Component {
   handlePressLogin() {
     // In state [Back To Login]
     if (this.state.isNewAccount) {
-      this.setState({ isNewAccount: false })
+      this.setState({ isNewAccount: false, createDisable: false })
       this.props.actBackToLogin();
     } else {
       // In state [Login]
@@ -153,7 +153,7 @@ class LoginScreen extends Component {
   render() {
     //----DEBUG---//
     // Skip Authentication Steps
-    if (0) {
+    if (1) {
       return <RootNavigator />;
     }
     //----DEBUG---//

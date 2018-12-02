@@ -1,11 +1,15 @@
 import {
   ACT_FETCH_JOB_LIST,
   ACT_FETCH_WISH_LIST,
+  ACT_JOB_INPUT_KEYWORD,
+  ACT_JOB_INPUT_LOCATION
 } from '../constant/ActionConst';
 
 const INITIAL_STATE = {
   jobList: {},
-  wishList: []
+  wishList: [],
+  inputKeyword: null,
+  inputLocation: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,6 +25,10 @@ export default (state = INITIAL_STATE, action) => {
         // when wish list has already existed
         return { ...state, wishList: [ ...action.payload ] };
       }
+    case ACT_JOB_INPUT_KEYWORD:
+      return { ...state, inputKeyword: action.payload };
+    case ACT_JOB_INPUT_LOCATION:
+      return { ...state, inputLocation: action.payload };
     default:
       return state;
   }

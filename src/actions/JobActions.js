@@ -5,12 +5,16 @@ import {
   ACT_FETCH_WISH_LIST,
   ACT_JOB_INPUT_KEYWORD,
   ACT_JOB_INPUT_LOCATION,
+  ACT_FETCH_JOB_FRONTEND,
+  ACT_FETCH_JOB_BACKEND,
 } from '../constant/ActionConst';
 
 
 const GITHUB_JOB_ROOT_URL = 'https://jobs.github.com/positions.json?';
 const SEARCH_KEYWORD = 'javascript';
 const SEARCH_LOCATION = 'new+york';
+const BACK_END = 'Back End';
+const FRONT_END = 'Front End';
 
 export const actFetchJobList = (keyword = SEARCH_KEYWORD, location = SEARCH_LOCATION) => {
   // Fetch job through github jobs api
@@ -18,10 +22,17 @@ export const actFetchJobList = (keyword = SEARCH_KEYWORD, location = SEARCH_LOCA
 
   return (dispatch) => {    
     axios.get(querry).then(response => {
-      dispatch({
-        type: ACT_FETCH_JOB_LIST,
-        payload: response.data
-      })
+      switch (keyword) {
+        case BACK_END:
+          dispatch({ type: ACT_FETCH_JOB_BACKEND, payload: response.data });
+          break;
+        case FRONT_END: 
+          dispatch({ type: ACT_FETCH_JOB_FRONTEND, payload: response.data });
+          break;
+        default:
+          dispatch({ type: ACT_FETCH_JOB_LIST, payload: response.data });
+          break;
+      }
     }).catch(e => console.log(e));
   }
 };

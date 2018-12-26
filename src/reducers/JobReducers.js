@@ -2,7 +2,9 @@ import {
   ACT_FETCH_JOB_LIST,
   ACT_FETCH_WISH_LIST,
   ACT_JOB_INPUT_KEYWORD,
-  ACT_JOB_INPUT_LOCATION
+  ACT_JOB_INPUT_LOCATION,
+  ACT_FETCH_JOB_BACKEND,
+  ACT_FETCH_JOB_FRONTEND,
 } from '../constant/ActionConst';
 
 const INITIAL_STATE = {
@@ -10,13 +12,19 @@ const INITIAL_STATE = {
   wishList: [],
   inputKeyword: null,
   inputLocation: null,
+  recJobBEndList: {},
+  recJobFEndList: {},
 };
 
 export default (state = INITIAL_STATE, action) => {
   console.log(action.payload);
   switch (action.type) {
     case ACT_FETCH_JOB_LIST:
-      return { ...state, jobList: action.payload };
+      return { ...state, jobList: action.payload, inputKeyword: null, inputLocation: null, };
+    case ACT_FETCH_JOB_BACKEND:
+      return { ...state, recJobBEndList: action.payload }
+    case ACT_FETCH_JOB_FRONTEND:
+      return { ...state, recJobFEndList: action.payload }
     case ACT_FETCH_WISH_LIST:
       if (action.payload === null) {
         // when wish list has not created yet, new account

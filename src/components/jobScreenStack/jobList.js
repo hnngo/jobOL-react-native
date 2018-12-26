@@ -94,6 +94,45 @@ class JobList extends Component {
       </View>
 
     );
+
+    // return (
+    //   <View style={sectionStyle}>
+    //     <View style={mainInfoStyle}>
+    //       <View styles={logoCompanyStyle}>
+    //         {this.renderCompanyLogo(job.company_logo)}
+    //       </View>
+
+    //       {/* Touch the Job */}
+    //       <TouchableWithoutFeedback
+    //         //onPress={() => this.setState({ modalVisible: true })}
+    //         onPress={() => this.props.navigation.navigate('JobDetailScreen', { jobId: job.id, jobName: job.jobSlot })}
+    //       >
+    //         <View style={jobDetailStyle}>
+    //           <Text style={jobTitleStyle}>
+    //             {job.title}
+    //           </Text>
+    //           <Text>{job.company}</Text>
+    //           <Text>{job.company_url}</Text>
+    //         </View>
+    //       </TouchableWithoutFeedback>
+
+    //       {/* Touch the Bookmark */}
+    //       <TouchableWithoutFeedback
+    //         onPress={() => this.handleBookmarkPress(job.id)}
+    //       >
+    //         <View style={bookmarkStyle}>
+    //           <FontAwesome
+    //             name={this.props.wishList.includes(job.id) ? 'bookmark' : 'bookmark-o'}
+    //             size={30}
+    //           />
+    //         </View>
+    //       </TouchableWithoutFeedback>
+    //     </View>
+
+    //     {this.renderJobStatus(job)}
+    //   </View>
+
+    // );
   }
 
   render() {
@@ -109,6 +148,7 @@ class JobList extends Component {
           renderItem={(job) => this.renderJobListItems(job.item)}
           keyExtractor={job => String(job.id)}
           extraData={this.props.wishList}
+          horizontal={true}
         />
       </View>
     );
@@ -118,7 +158,7 @@ class JobList extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     // flex: 1,
-    backgroundColor: COLOR_BG,
+    backgroundColor: "#fff",
     paddingTop: 10,
     paddingBottom: 10,
   },
@@ -154,11 +194,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => {
-  return {
-    jobList: state.reducerJob.jobList,
-    wishList: state.reducerJob.wishList
-  };
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     jobList: state.reducerJob.jobList,
+//     wishList: state.reducerJob.wishList
+//   };
+// }
 
-export default connect(mapStateToProps, { actBookMarkJob })(JobList);
+export default connect(null, { actBookMarkJob })(JobList);

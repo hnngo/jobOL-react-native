@@ -14,25 +14,15 @@ import {
 import { COLOR_MAIN } from '../constant/ColorCode';
 
 class JobScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerRight: (
-      // <Button
-      //   title="Search"
-      //   backgroundColor="rgba(0, 0, 0, 0)"
-      //   color="rgba(0, 122, 255, 1)"
-      //   onPress={() => navigation.navigate('setting')}
-      // />
-      <TouchableWithoutFeedback
-        onPress={() => {}}
-      >
-        <FontAwesome name="search" size={24} />
-      </TouchableWithoutFeedback>
-    )
-  })
+  constructor(props) {
+    super(props);
 
-  state = { isOpen: false,
-    swipeToClose: true,
-    sliderValue: 0.3 };
+    this.state = {
+      isOpen: false,
+      swipeToClose: true,
+      sliderValue: 0.3
+    };
+  }
 
   handleChangeJobKeyword(inputKeyword) {
     this.props.actJobInputKeyword(inputKeyword);
@@ -44,6 +34,8 @@ class JobScreen extends Component {
 
   componentWillMount() {
     this.props.actFetchJobList();
+    this.props.actFetchJobList("Back End");
+    this.props.actFetchJobList("Front End");
   }
 
   render() {
@@ -52,16 +44,20 @@ class JobScreen extends Component {
         <Button
           title="Search For Job"
           backgroundColor={COLOR_MAIN}
-          onPress={() => this.refs.modal4.open()}
+          onPress={() => this.refs.modalJobSearch.open()}
         />
         <JobList {...this.props} />
-        
+        <Text>Recommended Job For Back-End</Text>
+        <JobList jobList={this.props.recJobBEndList} wishList={this.props.wishList} />
+        <Text>Recommended Job For Front-End</Text>
+        <JobList jobList={this.props.recJobFEndList} wishList={this.props.wishList} />
+
         {/* Modal Components */}
         <Modal
-          isOpen={this.state.isOpen}
+          isOpen={false}
           style={styles.modalStyle}
           position="center"
-          ref="modal4"
+          ref="modalJobSearch"
           isDisabled={false}
           swipeToClose={true}
         >
@@ -82,7 +78,7 @@ class JobScreen extends Component {
             title="Search"
             onPress={() => {
               this.props.actFetchJobList(this.props.keyword, this.props.location);
-              this.refs.modal4.close();
+              this.refs.modalJobSearch.close();
             }}
           />
         </Modal>
@@ -100,16 +96,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
   },
-
-  text: {
-
-  }
-})
+});
 
 const mapStateToProps = ({ reducerJob }) => {
   return {
+    jobList: reducerJob.jobList,
+    wishList: reducerJob.wishList,
     keyword: reducerJob.inputKeyword,
     location: reducerJob.inputLocation,
+    recJobBEndList: reducerJob.recJobBEndList,
+    recJobFEndList: reducerJob.recJobFEndList,
   }
 }
 

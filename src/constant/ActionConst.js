@@ -16,6 +16,8 @@ export const ACT_CREATE_FAIL = 'act_create_fail';
 //------------FETCH---------------//
 export const ACT_FETCH_JOB_LIST = 'act_fetch_job_list';
 export const ACT_FETCH_WISH_LIST = 'act_fetch_wish_list';
+export const ACT_FETCH_JOB_BACKEND= 'act_fetch_job_backend';
+export const ACT_FETCH_JOB_FRONTEND = 'act_fetch_job_frontend';
 
 //------------JOB---------------//
 export const ACT_JOB_INPUT_KEYWORD = 'act_job_input_keyword';

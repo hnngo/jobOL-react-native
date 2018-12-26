@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   },
   
   textStyle: {
+    paddingTop: 10,
     fontSize: 20,
     fontWeight: "bold",
     paddingLeft: 10,

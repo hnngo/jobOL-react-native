@@ -63,3 +63,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(WishListScreen);
 
 // Slide to remove
+// No Jobs added to wishlist

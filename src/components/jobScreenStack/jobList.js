@@ -66,7 +66,7 @@ class JobList extends Component {
           {/* Touch the Job */}
           <TouchableWithoutFeedback
             //onPress={() => this.setState({ modalVisible: true })}
-            onPress={() => this.props.navigation.navigate('JobDetailScreen', { jobId: job.id, jobName: job.jobSlot })}
+            onPress={() => this.props.navigation.navigate('JobDetailScreen', { jobDetail: job })}
           >
             <View style={jobDetailStyle}>
               <Text style={jobTitleStyle}>

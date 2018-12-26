@@ -9,14 +9,16 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { actBookMarkJob } from '../../actions'
 import { COLOR_MAIN } from '../../constant/ColorCode';
+import { FontAwesome } from '@expo/vector-icons'
 
 class JobDetailScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: navigation.getParam('jobName', '')
-    }
-  }
+  // static navigationOptions = ({ navigation }) => {
+  //   return {
+  //     title: navigation.getParam('jobName', '')
+  //   }
+  // }
 
   formatText(string) {
     if (string === null || string === undefined) {
@@ -26,12 +28,23 @@ class JobDetailScreen extends Component {
     return (
       string.replace(/<\/?[a-z][a-z0-9]*>/g, '').replace(/<a/g, '')
     );
-    
-    // return (
-    //   string.replace(/<p>/g, '').replace(/<\/p>/g, '')
-    //         .replace(/<a>/g, '').replace(/<\/a>/g, '')
-    //         .replace(/<b>/g, '').replace(/<\/b>/g, '')
-    // );
+  }
+
+  renderCompanyLogo(logoURL) {
+    if (logoURL === null) {
+      return (
+        <View style={{ flex: 1, width: 180, resizeMode: 'contain' }}>
+          <FontAwesome name={'image'} size={160} />
+        </View>
+      );
+    }
+
+    return (
+      <Image 
+        style={{ flex: 1, width: 180, resizeMode: 'contain' }}
+        source={{ uri: logoURL}}
+      />
+    );
   }
 
 
@@ -42,10 +55,7 @@ class JobDetailScreen extends Component {
     return (
       <ScrollView style={styles.containerStyle}>
         <View style={{ height: 120, width: 180, alignSelf: 'center' }}>
-          <Image 
-            style={{ flex: 1, width: 180, resizeMode: 'contain'}}
-            source={{ uri: jobDetail.company_logo }}
-          />
+          {this.renderCompanyLogo(jobDetail.company_logo)}
         </View>
 
         <Text style={styles.jobTitleStyle}>{jobDetail.title}</Text>
@@ -58,7 +68,10 @@ class JobDetailScreen extends Component {
           borderRadius={6}
           title="Add To Wish List"
           backgroundColor={COLOR_MAIN}
-          onPress={() => {}}
+          onPress={() => {
+            this.props.actBookMarkJob(jobDetail.id, this.props.wishList);
+            this.props.navigation.goBack();
+          }}
           style={{ paddingBottom: 20 }}
         />
 
@@ -102,9 +115,10 @@ const styles = StyleSheet.create({
 const mapStateToProps = ({ reducerJob }) => {
   return {
     jobList: reducerJob.jobList,
+    wishList: reducerJob.wishList,
     recJobBEndList: reducerJob.recJobBEndList,
     recJobFEndList: reducerJob.recJobFEndList
   }
 }
 
-export default connect(mapStateToProps)(JobDetailScreen);
+export default connect(mapStateToProps, { actBookMarkJob })(JobDetailScreen);

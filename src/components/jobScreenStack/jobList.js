@@ -97,6 +97,7 @@ class JobList extends Component {
   }
 
   render() {
+    console.log(this.props.jobList);
     // In case when async function fetch job has not yet finished
     if (!this.props.jobList.length) {
       return <View/>;

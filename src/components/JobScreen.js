@@ -50,9 +50,9 @@ class JobScreen extends Component {
         <Text style={styles.textStyle}>Result for "{this.state.keyword || "Javascript"}" Job</Text>
         <JobList {...this.props} />
         <Text style={styles.textStyle}>Recommended Jobs For Back-End</Text>
-        <JobList {...this.props} jobList={this.props.recJobBEndList} wishList={this.props.wishList} />
+        <JobList {...this.props} jobList={this.props.recJobBEndList} />
         <Text style={styles.textStyle}>Recommended Jobs For Front-End</Text>
-        <JobList {...this.props} jobList={this.props.recJobFEndList} wishList={this.props.wishList} />
+        <JobList {...this.props} jobList={this.props.recJobFEndList} />
 
         {/* Modal Components */}
         <Modal

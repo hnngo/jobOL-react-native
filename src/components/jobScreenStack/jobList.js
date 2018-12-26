@@ -22,7 +22,7 @@ class JobList extends Component {
 
   renderJobStatus(job) {
     return (
-      <View style={{ paddingLeft: 20, flexDirection: 'row', alignItems: 'center' }}>
+      <View style={{ paddingTop: 20, paddingLeft: 20, flexDirection: 'row', alignItems: 'center' }}>
           <Ionicons name='ios-timer' size={20} />
           <Text>{job.created_at}</Text>
       </View>
@@ -94,45 +94,6 @@ class JobList extends Component {
       </View>
 
     );
-
-    // return (
-    //   <View style={sectionStyle}>
-    //     <View style={mainInfoStyle}>
-    //       <View styles={logoCompanyStyle}>
-    //         {this.renderCompanyLogo(job.company_logo)}
-    //       </View>
-
-    //       {/* Touch the Job */}
-    //       <TouchableWithoutFeedback
-    //         //onPress={() => this.setState({ modalVisible: true })}
-    //         onPress={() => this.props.navigation.navigate('JobDetailScreen', { jobId: job.id, jobName: job.jobSlot })}
-    //       >
-    //         <View style={jobDetailStyle}>
-    //           <Text style={jobTitleStyle}>
-    //             {job.title}
-    //           </Text>
-    //           <Text>{job.company}</Text>
-    //           <Text>{job.company_url}</Text>
-    //         </View>
-    //       </TouchableWithoutFeedback>
-
-    //       {/* Touch the Bookmark */}
-    //       <TouchableWithoutFeedback
-    //         onPress={() => this.handleBookmarkPress(job.id)}
-    //       >
-    //         <View style={bookmarkStyle}>
-    //           <FontAwesome
-    //             name={this.props.wishList.includes(job.id) ? 'bookmark' : 'bookmark-o'}
-    //             size={30}
-    //           />
-    //         </View>
-    //       </TouchableWithoutFeedback>
-    //     </View>
-
-    //     {this.renderJobStatus(job)}
-    //   </View>
-
-    // );
   }
 
   render() {
@@ -159,14 +120,26 @@ const styles = StyleSheet.create({
   containerStyle: {
     // flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 10,
-    paddingBottom: 10,
+    // paddingTop: 10,
+    // paddingBottom: 10,
+    padding: 10,
   },
 
   sectionStyle: {
     padding: 5,
-    borderBottomColor: INPUT_BORDER_COLOR,
-    borderBottomWidth: 1,
+    borderColor: INPUT_BORDER_COLOR,
+    borderWidth: 0.5,
+    borderRadius: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    height: 160,
+    width: 300,
   },
 
   mainInfoStyle: {

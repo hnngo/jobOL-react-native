@@ -31,7 +31,7 @@ class WishListScreen extends Component {
               <Text>{job.company}</Text>
               <Text>{job.location}</Text>
               <Text>{this.formatText(job.company_url)}</Text>
-              <Text>{this.formatText(job.how_to_apply)}</Text>
+              {/* <Text>{this.formatText(job.how_to_apply)}</Text> */}
               <Button
                 title="Apply Now!!!"
                 backgroundColor={COLOR_MAIN}

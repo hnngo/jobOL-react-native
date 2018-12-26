@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import Modal from 'react-native-modalbox';
@@ -18,6 +18,7 @@ class JobScreen extends Component {
     super(props);
 
     this.state = {
+      keyword: null,
       isOpen: false,
       swipeToClose: true,
       sliderValue: 0.3
@@ -40,17 +41,18 @@ class JobScreen extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView style={{ backgroundColor: "#fff"}}>
         <Button
           title="Search For Job"
           backgroundColor={COLOR_MAIN}
           onPress={() => this.refs.modalJobSearch.open()}
         />
+        <Text style={styles.textStyle}>Result for "{this.state.keyword || "Javascript"}" Job</Text>
         <JobList {...this.props} />
-        <Text>Recommended Job For Back-End</Text>
-        <JobList jobList={this.props.recJobBEndList} wishList={this.props.wishList} />
-        <Text>Recommended Job For Front-End</Text>
-        <JobList jobList={this.props.recJobFEndList} wishList={this.props.wishList} />
+        <Text style={styles.textStyle}>Recommended Jobs For Back-End</Text>
+        <JobList {...this.props} jobList={this.props.recJobBEndList} wishList={this.props.wishList} />
+        <Text style={styles.textStyle}>Recommended Jobs For Front-End</Text>
+        <JobList {...this.props} jobList={this.props.recJobFEndList} wishList={this.props.wishList} />
 
         {/* Modal Components */}
         <Modal
@@ -77,12 +79,13 @@ class JobScreen extends Component {
             icon={{ name: 'search', type: 'font-awesome' }}
             title="Search"
             onPress={() => {
+              this.setState({ keyword: this.props.keyword });
               this.props.actFetchJobList(this.props.keyword, this.props.location);
               this.refs.modalJobSearch.close();
             }}
           />
         </Modal>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -96,6 +99,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
   },
+  
+  textStyle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingLeft: 10,
+  }
 });
 
 const mapStateToProps = ({ reducerJob }) => {

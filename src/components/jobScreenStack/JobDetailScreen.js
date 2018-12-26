@@ -50,7 +50,6 @@ class JobDetailScreen extends Component {
 
   render() {
     const jobDetail = this.props.navigation.getParam('jobDetail', 'NONE');
-    console.log(jobDetail);
     
     return (
       <ScrollView style={styles.containerStyle}>
@@ -72,7 +71,7 @@ class JobDetailScreen extends Component {
             this.props.actBookMarkJob(jobDetail.id, this.props.wishList);
             this.props.navigation.goBack();
           }}
-          style={{ paddingBottom: 20 }}
+          style={{ paddingBottom: 10 }}
         />
 
         <Button

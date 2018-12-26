@@ -14,17 +14,13 @@ class WishListScreen extends Component {
     return (
       string.replace(/<\/?[a-z][a-z0-9]*>/g, '').replace(/<a/g, '')
     );
-    
-    // return (
-    //   string.replace(/<p>/g, '').replace(/<\/p>/g, '')
-    //         .replace(/<a>/g, '').replace(/<\/a>/g, '')
-    //         .replace(/<b>/g, '').replace(/<\/b>/g, '')
-    // );
   }
 
   renderJobCard() {
+    const newJobList = _.uniqBy([...this.props.jobList, ...this.props.recJobBEndList, ...this.props.recJobFEndList], 'id');
+    console.log(newJobList);
     return (
-      _.map(this.props.jobList, (job) => {
+      _.map(newJobList, (job) => {
         if (this.props.wishList.includes(job.id)) {
           return (
             <Card title={job.title} key={job.id}>
@@ -53,10 +49,12 @@ class WishListScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ reducerJob }) => {
   return { 
-    jobList: state.reducerJob.jobList,
-    wishList: state.reducerJob.wishList
+    jobList: reducerJob.jobList,
+    wishList: reducerJob.wishList,
+    recJobBEndList: reducerJob.recJobBEndList,
+    recJobFEndList: reducerJob.recJobFEndList,
   };
 };
 

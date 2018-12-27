@@ -7,6 +7,7 @@ import {
   ACT_JOB_INPUT_LOCATION,
   ACT_FETCH_JOB_FRONTEND,
   ACT_FETCH_JOB_BACKEND,
+  ACT_JOB_CLEAR_WISHLIST
 } from '../constant/ActionConst';
 
 
@@ -71,5 +72,11 @@ export const actJobInputLocation = (inputLocation) => {
   return {
     type: ACT_JOB_INPUT_LOCATION,
     payload: inputLocation
+  }
+}
+
+export const actJobWishListClear = () => {
+  return {
+    type: ACT_JOB_CLEAR_WISHLIST
   }
 }

@@ -22,3 +22,4 @@ export const ACT_FETCH_JOB_FRONTEND = 'act_fetch_job_frontend';
 //------------JOB---------------//
 export const ACT_JOB_INPUT_KEYWORD = 'act_job_input_keyword';
 export const ACT_JOB_INPUT_LOCATION = 'act_job_input_locaiton';
+export const ACT_JOB_CLEAR_WISHLIST = 'act_job_clear_wishlist';

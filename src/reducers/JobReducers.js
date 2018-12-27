@@ -5,6 +5,7 @@ import {
   ACT_JOB_INPUT_LOCATION,
   ACT_FETCH_JOB_BACKEND,
   ACT_FETCH_JOB_FRONTEND,
+  ACT_JOB_CLEAR_WISHLIST
 } from '../constant/ActionConst';
 
 const INITIAL_STATE = {
@@ -37,6 +38,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, inputKeyword: action.payload };
     case ACT_JOB_INPUT_LOCATION:
       return { ...state, inputLocation: action.payload };
+    case ACT_JOB_CLEAR_WISHLIST:
+      return { ...state, wishList: [] };
     default:
       return state;
   }

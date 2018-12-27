@@ -4,8 +4,28 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-native-elements';
 import { COLOR_MAIN } from '../constant/ColorCode';
+import { actJobWishListClear } from '../actions';
 
 class WishListScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: (
+      <Button
+        title="Reset"
+        backgroundColor="rgba(0, 0, 0, 0)"
+        color={COLOR_MAIN}
+        onPress={navigation.getParam('resetWL')}
+      />
+    )
+  })
+
+  componentDidMount() {
+    this.props.navigation.setParams({ resetWL: this.resetWishList.bind(this) });
+  }
+
+  resetWishList() {
+    this.props.actJobWishListClear();
+  }
+
   formatText(string) {
     if (string === null || string === undefined) {
       return string;
@@ -18,7 +38,7 @@ class WishListScreen extends Component {
 
   renderJobCard() {
     const newJobList = _.uniqBy([...this.props.jobList, ...this.props.recJobBEndList, ...this.props.recJobFEndList], 'id');
-    console.log(newJobList);
+
     return (
       _.map(newJobList, (job) => {
         if (this.props.wishList.includes(job.id)) {
@@ -58,7 +78,7 @@ const mapStateToProps = ({ reducerJob }) => {
   };
 };
 
-export default connect(mapStateToProps)(WishListScreen);
+export default connect(mapStateToProps, { actJobWishListClear })(WishListScreen);
 
 // Slide to remove
 // No Jobs added to wishlist

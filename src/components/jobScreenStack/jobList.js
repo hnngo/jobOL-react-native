@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
   }
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     jobList: state.reducerJob.jobList,
-//     wishList: state.reducerJob.wishList
-//   };
-// }
+const mapStateToProps = (state) => {
+  return {
+    // jobList: state.reducerJob.jobList,
+    wishList: state.reducerJob.wishList
+  };
+}
 
-export default connect(null, { actBookMarkJob })(JobList);
+export default connect(mapStateToProps, { actBookMarkJob })(JobList);

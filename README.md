@@ -1,9 +1,19 @@
-# JobOL
-JobOL is an IOS application built by react-native using expo.
 
 ## Description
-The application provides the job information based on search keyword and location. The job info is derived from [GIT HUB Api](https://jobs.github.com/api).
-User account information and user's job wish lists on Google Firebase API.
+JobOL is an IOS application using react-native and expo cli. JobOL allow users search for his/her dream jobs quickly.
+
+The application provides the job information based on search keyword and location. The job information is derived from [GIT HUB Api](https://jobs.github.com/api).
+
+User account information and user's job wish lists are stored using Google Firebase API.
+
+## Technologies/Libraries
+The project is initiated by [Expo-cli](https://expo.io/tools).
+
+[Google Firebase](https://firebase.google.com/) is used in the part of authentication and storing data in real-time databse. Both creating account or signing in account are processed by using Google Firebase API.
+
+I used [Redux](https://redux.js.org/introduction/getting-started) as a state management for my project
+
+For the Cross Platform React Native UI Toolkit, I used [React Native Elements](https://react-native-training.github.io/react-native-elements/).
 
 ## Dependencies
 ```

@@ -18,7 +18,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case ACT_FETCH_JOB_LIST:
       return { ...state, jobList: action.payload, inputKeyword: null, inputLocation: null, };

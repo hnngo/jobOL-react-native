@@ -29,14 +29,14 @@ const INITIAL_STATE = {
 
 //----DEBUG---//
 // Skip Input User/Password
-if (1) {
+if (0) {
   INITIAL_STATE.email = 'test@a.com';
   INITIAL_STATE.password = '123456';
 }
 //----DEBUG---//
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action)
+  // console.log(action)
   switch (action.type) {
     //--------------LOGIN----------------//
     case ACT_LOGIN_INPUT_EMAIL:
